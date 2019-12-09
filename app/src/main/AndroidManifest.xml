@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.example.barangayinformationsystem">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
+
+    <application
+            android:allowBackup="true"
+            android:icon="@mipmap/ic_launcher"
+            android:label="@string/app_name"
+            android:roundIcon="@mipmap/ic_launcher_round"
+            android:supportsRtl="true"
+            android:theme="@style/AppTheme">
+        <activity android:name=".ConfirmSignUp">
+        </activity>
+        <activity android:name=".SignInActivity">
+        </activity>
+        <activity android:name=".PhoneNumber">
+        </activity>
+        <activity android:name=".EventDetail">
+        </activity>
+
+        <service
+                android:name="com.amazonaws.mobileconnectors.s3.transferutility.TransferService"
+                android:enabled="true"/>
+
+        <activity android:name=".PhotoPicker">
+        </activity>
+        <activity android:name=".GetLocation">
+        </activity>
+        <activity
+                android:name=".CheckDocuments"
+                android:label="@string/title_activity_check_documents"
+                android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity
+                android:name=".OnboardingManager"
+                android:label="@string/title_activity_onboarding_manager"
+                android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity
+                android:name=".Onboarding"
+                android:label="@string/title_activity_onboarding"
+                android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity
+                android:name=".RegisterResident"
+                android:label="@string/title_activity_register_resident"
+                android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity
+                android:name=".CheckStatus"
+                android:label="@string/title_activity_check_status"
+                android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+
+        <activity
+                android:name=".BottomMenu"
+                android:label="@string/title_activity_bottom_menu">
+        </activity>
+        <activity
+                android:name=".Launcher"
+                android:label="@string/title_activity_launcher"
+                android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <activity
+                android:name=".LoginUser"
+                android:label="@string/title_activity_login_user"
+                android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity
+                android:name=".ClearanceApplication"
+                android:label="@string/title_activity_clearance_application"
+                android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity
+                android:name=".BusinessPermitApplication"
+                android:label="@string/title_activity_business_permit_application"
+                android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+
+        <activity
+                android:name=".RegisterUser"
+                android:label="@string/title_activity_register_user"
+                android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+
+        <activity
+                android:name=".PostComplaint"
+                android:label="@string/title_activity_post_complaint"
+                android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+
+
+        <uses-library
+                android:name="org.apache.http.legacy"
+                android:required="false"/>
+
+        <meta-data
+                android:name="com.google.android.geo.API_KEY"
+                android:value="AIzaSyC7turL9Nw0A5D4xLT4QJqBhp1xC4wB7hI"/>
+        <meta-data
+                android:name="com.google.android.gms.ads.APPLICATION_ID"
+                android:value="ca-app-pub-7625476876021461~6950515027"/>
+    </application>
+
+</manifest>

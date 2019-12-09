@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                   xmlns:tools="http://schemas.android.com/tools"
+                                                   android:layout_width="wrap_content"
+                                                   android:layout_height="wrap_content"
+                                                   tools:context=".StatusHolder"
+>
+    <de.hdodenhof.circleimageview.CircleImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/imageContentView"
+            android:layout_width="80dp"
+            android:layout_height="62dp"
+            android:src="@drawable/hotels"
+            app:civ_border_width="0dp"
+            app:civ_border_color="#FF000000"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="16dp" android:layout_marginRight="16dp"/>
+
+    <TextView
+            android:id="@+id/contentTextView"
+            android:layout_width="286dp"
+            android:layout_height="45dp"
+            android:layout_margin="@dimen/text_margin"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="13dp"
+            android:background="#00FFFFFF"
+            android:fontFamily="sans-serif-thin"
+            android:scrollbars="vertical"
+            android:textAppearance="?attr/textAppearanceListItem"
+            android:textColor="@color/colorFormMasterElementTextTitle"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toStartOf="@+id/imageContentView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+            android:id="@+id/publishDate"
+            android:layout_width="96dp"
+            android:layout_height="19dp"
+            android:layout_marginStart="16dp"
+            android:textColor="#C9C5C5"
+            android:textSize="10sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/contentTextView" />
+</androidx.constraintlayout.widget.ConstraintLayout>

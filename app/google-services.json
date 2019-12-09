@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "642798722100",
+    "firebase_url": "https://barangay-ims-d9043.firebaseio.com",
+    "project_id": "barangay-ims-d9043",
+    "storage_bucket": "barangay-ims-d9043.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:642798722100:android:a769622483c47ce18a3e61",
+        "android_client_info": {
+          "package_name": "com.example.barangayinformationsystem"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "642798722100-ta1q6if6ck5apqnelrv956opugsnqqf6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCpB5O4Fi6hId3mHC5kLTaykHpLqUay4ow"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "642798722100-ta1q6if6ck5apqnelrv956opugsnqqf6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+            android:id="@+id/navigation_home"
+            android:icon="@drawable/map_icon"
+            android:title="@string/title__events"/>
+
+    <item
+            android:id="@+id/navigation_dashboard"
+            android:icon="@drawable/document_icon"
+            android:title="@string/title_documents"/>
+
+    <item
+            android:id="@+id/navigation_notifications"
+            android:icon="@drawable/calendar_icon"
+            android:title="@string/title_complaints"/>
+
+    <item
+            android:id="@+id/navigation_emergency"
+            android:icon="@drawable/emergency"
+            android:title="Emergency"/>
+
+</menu>
