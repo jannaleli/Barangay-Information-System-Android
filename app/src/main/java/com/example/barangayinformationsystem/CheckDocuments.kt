@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -66,6 +67,8 @@ private lateinit var linearLayoutManager: LinearLayoutManager
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        var PERMIT_DONE = false
+        var CLEARANCE_DONE = false
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_check_documents)
         var list = findViewById(R.id.listRec) as RecyclerView // Add this
@@ -89,17 +92,17 @@ val callback = object : clearanceCallback {
             for(each in clearance) {
                 var stats = Status()
                 if (each.status == "REJECTED") {
-                    stats = Status(sourceTitle = each.user_id , date = each.expiration_date, image = R.drawable.rejected)
+                    stats = Status(sourceTitle = each.user_id , date = each.expiration_date, type = "Clearance", description = each.reason, image = R.drawable.rejected)
                 }else if(each.status == "APPROVED") {
-                    stats = Status(sourceTitle = each.user_id , date = each.expiration_date, image = R.drawable.approved)
+                    stats = Status(sourceTitle = each.user_id , date = each.expiration_date, type = "Clearance", description = each.reason, image = R.drawable.approved)
                 }else{
-                    stats = Status(sourceTitle = each.user_id , date = each.expiration_date, image = R.drawable.pending)
+                    stats = Status(sourceTitle = each.user_id , date = each.expiration_date, type = "Clearance", description = each.reason, image = R.drawable.pending)
                 }
 
             itemsClearance.add(stats)
         }
 
-
+        CLEARANCE_DONE = true
 //        val items = listOf(
 //            Status(
 //                sourceTitle = "Ref # ABCD1234", date = "07/07/90", image = R.drawable.rejected
@@ -115,12 +118,7 @@ val callback = object : clearanceCallback {
 //            )
 //        )
 
-        runOnUiThread(Runnable {
-            //stuff that updates ui
-            adapter = CheckDocuments.MyStatusAdapter()
-            adapter.replaceItems(itemsClearance)
-            list.adapter = adapter
-        })
+
     }
 
 
@@ -148,15 +146,16 @@ val callback = object : clearanceCallback {
                     for(each in clearance) {
                         var stats = Status()
                         if (each.status == "REJECTED") {
-                            stats = Status(sourceTitle = each.user_id , date = each.approval_date, image = R.drawable.rejected)
+                            stats = Status(sourceTitle = each.user_id , date = each.approval_date, type = "Permit", description = each.business_name, image = R.drawable.rejected)
                         }else if(each.status == "APPROVED") {
-                            stats = Status(sourceTitle = each.user_id , date = each.approval_date, image = R.drawable.approved)
+                            stats = Status(sourceTitle = each.user_id , date = each.approval_date, type = "Permit", description = each.business_name, image = R.drawable.approved)
                         }else{
-                            stats = Status(sourceTitle = each.user_id , date = each.approval_date, image = R.drawable.pending)
+                            stats = Status(sourceTitle = each.user_id , date = each.approval_date, type = "Permit", description = each.business_name, image = R.drawable.pending)
                         }
 
                         itemsClearance.add(stats)
                     }
+                    PERMIT_DONE = true
 
 
 //        val items = listOf(
@@ -175,12 +174,7 @@ val callback = object : clearanceCallback {
 //        )
 
 
-                    runOnUiThread(Runnable {
-                        //stuff that updates ui
-                        adapter = CheckDocuments.MyStatusAdapter()
-                        adapter.replaceItems(itemsClearance)
-                        list.adapter = adapter
-                    })
+
                 }
 
 
@@ -194,7 +188,17 @@ val callback = object : clearanceCallback {
            var username = barangay_preference!!.getString("username", null)
             APICalls.callDocuments(username, callback)
             APICalls.callPermit(username, permitcallback)
+            runOnUiThread(Runnable {
+                //stuff that updates ui
 
+                if(PERMIT_DONE == true && CLEARANCE_DONE == true){
+                    adapter = CheckDocuments.MyStatusAdapter()
+
+                    adapter.replaceItems(itemsClearance)
+                    list.adapter = adapter
+                }
+
+            })
 
         }).start()
 
@@ -227,6 +231,7 @@ val callback = object : clearanceCallback {
       //  var clearance = APICalls.callDocuments("jannaleli")
 
     }
+
 
     class MyStatusAdapter : RecyclerView.Adapter<MyStatusAdapter.ViewHolder>() {
         private var items = listOf<Status>()
@@ -263,6 +268,37 @@ val callback = object : clearanceCallback {
            holder.containerView.contentTextView.text = item.sourceTitle
          //   holder.containerView.sourceTextView.text = item.date
             holder.containerView.imageContentView.setImageResource(item.image)
+
+            holder.containerView.setOnClickListener {
+                val builder = AlertDialog.Builder(holder.containerView.context)
+                //set title for alert dialog
+                builder.setTitle(item.type)
+                //set message for alert dialog
+                var messageString = ""
+                if(item.type == "Permit"){
+                    messageString =  "Business Name: " + item.description + "\n" + "Approval Date: " + item.date +  "\n\n" + "Note: Barangay Business Permit is renewed anually. Please watch out for the announcement."
+
+                }else{
+                    messageString =  "Reason for Application: " + item.description + "\n" + "Approval Date: " + item.date + "\n\n" + "Note: Barangay Clearance will expire 1 year from approval date."
+                }
+
+                builder.setMessage(messageString)
+                builder.setIcon(android.R.drawable.ic_dialog_alert)
+
+                //performing positive action
+                builder.setPositiveButton("OK"){dialogInterface, which ->
+                    //Toast.makeText(applicationContext,"clicked yes",Toast.LENGTH_LONG).show()
+                    //   finish()
+                }
+                //performing cancel action
+
+
+                // Create the AlertDialog
+                val alertDialog: AlertDialog = builder.create()
+                // Set other dialog properties
+                alertDialog.setCancelable(false)
+                alertDialog.show()
+            }
 
         }
 

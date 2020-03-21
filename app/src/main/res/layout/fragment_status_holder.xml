@@ -31,7 +31,7 @@
             android:scrollbars="vertical"
             android:textAppearance="?attr/textAppearanceListItem"
             android:textColor="@color/colorFormMasterElementTextTitle"
-            android:textSize="12sp"
+            android:textSize="18sp"
             app:layout_constraintEnd_toStartOf="@+id/imageContentView"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

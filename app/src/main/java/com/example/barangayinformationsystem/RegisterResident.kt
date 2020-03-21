@@ -143,7 +143,7 @@ class RegisterResident : AppCompatActivity() {
 // multiple items picker input
 
 
-        val tinnumber = FormElementTextNumber.createInstance().setTitle("TIN").setHint("Enter TIN").setTag(12)
+        val tinnumber = FormElementTextNumber.createInstance().setTitle("TIN").setHint("Enter TIN").setTag(12).setRequired(true)
 
         val profession = FormElementTextSingleLine.createInstance().setTitle("Profession").setHint("Enter Profession").setTag(13)
         val weight = FormElementTextNumber.createInstance().setTitle("Weight").setHint("Enter Weight (Kilogram)").setTag(14)
@@ -182,6 +182,9 @@ class RegisterResident : AppCompatActivity() {
 
         submitButton.setOnClickListener {
                 view ->
+
+            val value = mFormBuilder.isValidForm();
+            print(value)
 
            // val username = mFormBuilder.getFormElement(1)
            // val usernamev = username.getValue()
@@ -242,6 +245,10 @@ class RegisterResident : AppCompatActivity() {
             val gross_incomev = gross_income.getValue()
 
             val user_id = emailaddress.getValue()
+            barangay_preference = getSharedPreferences(PREFS_FILENAME, 0)
+            val editor = barangay_preference!!.edit()
+            editor.putString("username", user_id)
+            editor.apply()
             var answer: String = ""
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 val current = LocalDateTime.now()
@@ -261,6 +268,7 @@ class RegisterResident : AppCompatActivity() {
                     override fun onSuccess() {
                         // no errors
                         //display success message
+
                         val attributes = HashMap<String, String>()
                         attributes.put("email", emailaddressv)
                         AWSMobileClient.getInstance().initialize(applicationContext, object : Callback<UserStateDetails> {
@@ -279,14 +287,14 @@ class RegisterResident : AppCompatActivity() {
                                                     if (!signUpResult.getConfirmationState()) {
                                                         val details = signUpResult.getUserCodeDeliveryDetails()
                                                         //  makeToast("Confirm sign-up with: " + details.getDestination())
-                                                      //  val intent = Intent(
-                                                       //     this@RegisterResident,
-                                                        //    ConfirmSignUp::class.java
-                                                       // )    //(this, SignInActivity::class.java)
+                                                        val intent = Intent(
+                                                            this@RegisterResident,
+                                                            ConfirmSignUp::class.java
+                                                        )    //(this, SignInActivity::class.java)
                                                         // start your next activity
-                                                        //startActivity(intent)
+                                                        startActivity(intent)
                                                         runOnUiThread {
-                                                            showSuccess("An administrator will confirm your sign up!")
+                                                          //  showSuccess("An administrator will confirm your sign up!")
                                                         }
                                                     } else {
                                                         // makeToast("Sign-up done.")
@@ -347,8 +355,67 @@ class RegisterResident : AppCompatActivity() {
                     professionv == "" ||
                     genderv == ""   ){
 
+                    var msg = ""
+
+                    if(user_id == ""){
+
+                    }
+                    if(emailaddressv == ""){
+                       msg =  msg + "Email Address \n"
+
+
+                    }
+                    if(passwordv == ""){
+                        msg =   msg + "Password \n"
+                    }
+                    if(addressv == ""){
+                        msg =   msg + "Address \n"
+                    }
+                    if(birthdatev == ""){
+                        msg =   msg + "Birth Date \n"
+                    }
+                    if(createdatev == ""){
+
+                    }
+                    if(firstnamev == ""){
+                        msg =   msg + "First Name \n"
+                    }
+                    if(lastnamev == ""){
+                        msg =   msg + "Last Name \n"
+                    }
+                    if(phonenumberv == ""){
+                        msg =  msg + "Phone Number \n"
+                    }
+                    if(zipnov == ""){
+                        msg =   msg + "Zip Number \n"
+                    }
+                    if(civilstatusv == ""){
+                        msg =  msg + "Civil Status \n"
+                    }
+                    if(tinnumberv == ""){
+                        msg =   msg + "Tin Number \n"
+                    }
+                    if(birthplacev == ""){
+                        msg =   msg + "Birth Place \n"
+                    }
+                    if(weightv == ""){
+                        msg =  msg + "Weight \n"
+                    }
+                    if(heightv == ""){
+                        msg =  msg + "Height \n"
+                    }
+                    if(professionv == ""){
+                        msg =   msg + "Profession \n"
+                    }
+                    if(genderv == ""){
+                        msg =   msg + "Gender \n"
+                    }
+
                     runOnUiThread {
-                        showEmptyError("One of the fields are empty")
+                        val message = "One of the fields are empty \n" + msg
+
+
+                        showEmptyError(message)
                     }
 
                 }else{

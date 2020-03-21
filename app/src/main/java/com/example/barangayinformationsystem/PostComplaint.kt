@@ -22,7 +22,8 @@ import androidx.core.app.NotificationCompat.getExtras
 import java.util.*
 import kotlin.collections.ArrayList
 
-
+import java.text.SimpleDateFormat
+import java.util.*
 public interface mapCallback {
     fun onSuccess(latitude: String, longitude: String)
     fun onError(err: String)
@@ -157,9 +158,9 @@ class PostComplaint : AppCompatActivity() {
         val description =
             FormElementTextMultiLine.createInstance().setTitle("Complaint Description").setTag(2)
 
-        val date =
-            FormElementPickerDate.createInstance().setTitle("Date").setDateFormat("MMM dd, yyyy")
-                .setTag(3)
+       // val date =
+       //     FormElementPickerDate.createInstance().setTitle("Date").setDateFormat("MMM dd, yyyy")
+        //        .setTag(3)
         //val longitudeForm =
         //    FormElementTextSingleLine.createInstance().setTitle("Latitude").setHint("Latitude")
         //        .setTag(4).setValue(latitude)
@@ -192,7 +193,7 @@ class PostComplaint : AppCompatActivity() {
         formItems.add(header)
        // formItems.add(text)
         formItems.add(description)
-        formItems.add(date)
+      //  formItems.add(date)
         formItems.add(complaintCat)
         //formItems.add(longitudeForm)
         //formItems.add(latitudeForm)
@@ -230,8 +231,8 @@ class PostComplaint : AppCompatActivity() {
                 val description = mFormBuilder.getFormElement(2)
                 val descriptionv = description.getValue()
 
-                val date = mFormBuilder.getFormElement(3)
-                val datev = date.getValue()
+               // val date = mFormBuilder.getFormElement(3)
+              //  val datev = date.getValue()
 
                 val complaintCat = mFormBuilder.getFormElement(7)
                 val complaintCatv = complaintCat.getValue()
@@ -280,14 +281,42 @@ class PostComplaint : AppCompatActivity() {
                     latitude == "" ||
                     longitude == "" ||
                     complaintCatv == "" ||
-                    user_id == "" ||
-                     datev == "" ){
+                    user_id == ""   /*||
+                   datev == ""*/ ){
+                    var msg = ""
+                    if(user_id == ""){
+
+                    }
+                    if(complaintId == ""){
+
+                    }
+                    if(descriptionv == ""){
+                        msg = msg + "Description\n"
+                    }
+                    if(latitude == ""){
+                        msg = msg + "Latitude \n"
+                    }
+                    if(longitude == ""){
+                        msg = msg + "Longitude \n"
+                    }
+                    if(complaintCatv == ""){
+                        msg = msg + "Complaint Category \n"
+                    }
+                    if(user_id == ""){
+
+                    }
+                 /*   if(datev == ""){
+                        msg = msg + "Date"
+                    }*/
 
                     runOnUiThread {
                         showEmptyError("One of the fields are empty")
                     }
 
                 }else{
+                         var date = Date();
+                        val formatter = SimpleDateFormat("MMM dd yyyy HH:mma")
+                        val answer: String = formatter.format(date)
                     APICalls.postComplaint(
                         complaintId,
                         "sample",
@@ -297,7 +326,7 @@ class PostComplaint : AppCompatActivity() {
                         complaintCatv,
                         user_id,
                         "New",
-                        datev,
+                        answer,
                         callback
 
 

@@ -232,6 +232,7 @@ class MyQuoteListFragment : Fragment() {
     private fun downloadFile(fileName: String, callback: picCallback) {
         val localFile = File.createTempFile("images", "jpg"/*getFileExtension(fileUri!!)*/);
 
+      //  val credentials = BasicAWSCredentials("AKIAIZGJAQVC2ET4ITYQ", "lskxORlNq8WNtYpsl8EYtTTt+ypAA1h09DsYKVsG")
         val credentials = BasicAWSCredentials("", "")
         var clientConfiguration: ClientConfiguration = ClientConfiguration()
         clientConfiguration.setMaxErrorRetry(0);
@@ -346,13 +347,19 @@ class MyQuoteListFragment : Fragment() {
 
 
                     //  fc.toggle(false)
+                    var byteArray: ByteArray? = null
 
-                    val filename: String = "temporary.png"
-                    val stream: ByteArrayOutputStream = ByteArrayOutputStream()
                     val bmp = item.image
-                    bmp!!.compress(Bitmap.CompressFormat.PNG, 100, stream)
 
-                    val byteArray: ByteArray = stream.toByteArray()
+
+                        val filename: String = "temporary.png"
+                        val stream: ByteArrayOutputStream = ByteArrayOutputStream()
+                        bmp!!.compress(Bitmap.CompressFormat.PNG, 100, stream)
+                         byteArray = stream.toByteArray()
+
+
+
+
 
 
                     //Cleanup

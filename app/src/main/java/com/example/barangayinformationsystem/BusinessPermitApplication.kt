@@ -2,6 +2,7 @@ package com.example.barangayinformationsystem
 
 import android.app.PendingIntent.getActivity
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AlertDialog
@@ -9,11 +10,15 @@ import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-
+import java.time.LocalDate
+import java.text.SimpleDateFormat;
+import java.util.*
 import kotlinx.android.synthetic.main.activity_business_permit_application.*
 import me.riddhimanadib.formmaster.FormBuilder
 import me.riddhimanadib.formmaster.model.*
 import java.util.UUID;
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 public interface generalCallback {
     fun onSuccess()
     fun onError(err: String)
@@ -206,7 +211,14 @@ class BusinessPermitApplication : AppCompatActivity() {
             val businessstreetv = businessstreet.getValue()
             val businessbuildingnumber = mFormBuilder.getFormElement(18)
             val businessbuildingnumberv = businessbuildingnumber.getValue()
-            val approvalDate = "null"
+
+                var date = Date();
+                val formatter = SimpleDateFormat("MMM dd yyyy HH:mma")
+                val recent_date: String = formatter.format(date)
+
+
+
+            val approvalDate = "Pending"
 
 
             Thread(Runnable {
@@ -252,33 +264,100 @@ class BusinessPermitApplication : AppCompatActivity() {
                     businessbuildingnumberv == ""  ||
                     approvalDate == ""  ){
 
+                    var msg = ""
+                    if(user_id == ""){
+
+                    }
+                    if(username == ""){
+
+                    }
+                    if(businessValue == ""){
+                        msg = msg + "Business\n"
+                    }
+                    if(ctcValue == ""){
+                        msg = msg + "CTC \n"
+                    }
+                    if(lessorsubdivisionvalue == ""){
+                        msg = msg + "Lessor Subdivision \n"
+                    }
+                    if(lessorstreetvalue == ""){
+                        msg = msg + "Lessor Street \n"
+                    }
+                    if(businessactivityv == ""){
+                        msg = msg + "Business Activity \n"
+                    }
+                    if(monthlyrentalv == ""){
+                        msg = msg + "Monthly Rental \n"
+                    }
+                    if(lessorprovincev == ""){
+                        msg = msg + "Lessor Province \n"
+                    }
+                    if(capitalizationv == ""){
+                        msg = msg + "Capitalization \n"
+                    }
+                    if(grosssalev == ""){
+                        msg = msg + "Gross Sale \n"
+                    }
+                    if(lessorbuildingnumberv == ""){
+                        msg = msg + "Lessor Building Number \n"
+                    }
+                    if(secnov == ""){
+                        msg = msg + "SEC No \n"
+                    }
+                    if(lessoremailaddressv == ""){
+                        msg = msg + "Lessor Email Address \n"
+                    }
+                    if(lessorbarangayv == ""){
+                        msg = msg + "Lessor Barangay \n"
+                    }
+                    if(numberofunitsv == ""){
+                        msg = msg + "Number of Units \n"
+                    }
+                    if(lessornamev == ""){
+                        msg = msg + "Lessor Name \n"
+                    }
+                    if(lessorcityv == ""){
+                        msg = msg + "Lessor City \n"
+                    }
+                    if(businessstreetv == ""){
+                        msg = msg + "Business Street \n"
+                    }
+                    if(businessbuildingnumberv == ""){
+                        msg = msg + "Business Building Number \n"
+                    }
+                    if(approvalDate == ""){
+
+                    }
                     runOnUiThread {
-                        showEmptyError("One of the fields are empty")
+                        val message = "One of the fields are empty \n" + msg
+
+
+                        showEmptyError(message)
                     }
 
                 }else{
                     APICalls.sendPermit(
                         user_id,
                         username,
-                        businessValue,
-                        ctcValue,
-                        lessorsubdivisionvalue,
-                        lessorsubdivisionvalue,
-                        lessorstreetvalue,
-                        businessactivityv,
-                        monthlyrentalv,
-                        lessorprovincev,
-                        capitalizationv,
-                        grosssalev,
-                        lessorbuildingnumberv,
-                        secnov,
-                        lessoremailaddressv,
-                        lessorbarangayv,
-                        numberofunitsv,
-                        lessornamev,
-                        lessorcityv,
+                        recent_date,
+                         secnov,
+                         businessbuildingnumberv,
+                         businessstreetv,
+                         businessactivityv,
+                         businessValue,
+                         capitalizationv,
+                         ctcValue,
+                         lessorbarangayv,
+                         lessorbuildingnumberv,
+                         lessorcityv,
+                         lessoremailaddressv,
+                         lessornamev,
+                         lessorprovincev,
+                         lessorstreetvalue,
+                         lessorsubdivisionvalue,
+                         monthlyrentalv,
                         "NEW",
-                        businessbuildingnumberv,
+                         grosssalev,
                         approvalDate,
                         callback
                     )

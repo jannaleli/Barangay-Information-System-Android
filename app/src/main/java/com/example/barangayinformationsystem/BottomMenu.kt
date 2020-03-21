@@ -10,6 +10,10 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_bottom_menu.*
 import kotlinx.android.synthetic.main.activity_check_status.*
 import android.app.Application
+import android.content.Intent
+import android.content.SharedPreferences
+import android.preference.PreferenceManager
+import android.widget.ImageButton
 import com.google.android.gms.ads.*
 
 
@@ -54,10 +58,21 @@ class BottomMenu : AppCompatActivity(){
 
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
         mAdView = findViewById(R.id.adView)
+        val logoutButton: ImageButton = findViewById(R.id.logoutButton)
         //mAdView!!.adSize = AdSize.BANNER
       //  mAdView!!.adUnitId = "ca-app-pub-7625476876021461/6286787151"
         var adRequest: AdRequest = AdRequest.Builder().build()
         mAdView!!.loadAd(adRequest!!)
+
+        logoutButton.setOnClickListener {
+            val prefs = barangay_preference!!.edit()
+            prefs.remove("username").commit()
+
+            val intent = Intent(this, Launcher::class.java)
+            // start your next activity
+            startActivity(intent)
+
+        }
 
 
         mAdView!!.setAdListener(object : AdListener() {

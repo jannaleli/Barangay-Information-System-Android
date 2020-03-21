@@ -151,13 +151,17 @@ class ComplaintFragment : Fragment(), OnMapReadyCallback {
                         var itemsClearance: MutableList<LatLng>  = arrayListOf()
 
                         for(each in clearance) {
+
+                            if (each.status.toString() == "RESOLVED") {
+                                break
+                            }
                             val lat = each.latitude.toDouble()
                             val long = each.longitude.toDouble()
                             val location = LatLng(lat, long)
 
                             itemsClearance.add(location)
                             map.addMarker(
-                                MarkerOptions().position(location).title(each.complaint_desc))
+                                MarkerOptions().position(location).title(each.complaint_desc).snippet(each.complaint_desc))
                         }
                         map.animateCamera(
                             CameraUpdateFactory.newLatLngZoom(

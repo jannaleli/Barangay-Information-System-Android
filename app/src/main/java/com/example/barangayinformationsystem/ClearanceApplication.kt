@@ -11,7 +11,10 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_clearance_application.*
 import me.riddhimanadib.formmaster.FormBuilder
 import me.riddhimanadib.formmaster.model.*
-import java.util.UUID;
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
+
 class ClearanceApplication : AppCompatActivity() {
 
     fun showError(message: String) {
@@ -96,7 +99,7 @@ class ClearanceApplication : AppCompatActivity() {
 
 
 
-        val header = FormHeader.createInstance("Personal Instance")
+        val header = FormHeader.createInstance("Personal Particulars")
        // val reason = FormElementTextSingleLine.createInstance().setTitle("Reason").setHint("Enter Business Name")
         val governmentid = FormElementTextNumber.createInstance().setTitle("Government ID (Passport/TIN/SSS/Etc.)").setTag(1)
 
@@ -131,6 +134,9 @@ class ClearanceApplication : AppCompatActivity() {
             val reasonValue = reason.getValue()
             val governmentId = mFormBuilder.getFormElement(1)
             val governmentIdValue = governmentId.getValue()
+            var date = Date();
+            val formatter = SimpleDateFormat("MMM dd yyyy HH:mma")
+            val recent_date: String = formatter.format(date)
 
 
 
@@ -161,18 +167,35 @@ class ClearanceApplication : AppCompatActivity() {
                     usernameNow == "" ||
                     governmentIdValue == "" ||
                     reasonValue == "" ){
+                    var msg = ""
+                    if(user_id == ""){
+
+                    }
+                    if(usernameNow == ""){
+
+                    }
+                    if(governmentIdValue == ""){
+                        msg = msg + "Government ID\n"
+                    }
+                    if(reasonValue == ""){
+                        msg = msg + "Reason \n"
+                    }
+
 
                     runOnUiThread {
-                        showEmptyError("One of the fields are empty")
+                        val message = "One of the fields are empty \n" + msg
+
+
+                        showEmptyError(message)
                     }
 
                 }else{
                     APICalls.sendDocuments(
                         user_id,
                         usernameNow,
-                        "null",
+                        "Pending",
                         governmentIdValue,
-                        "none",
+                        recent_date,
                         reasonValue,
                         "NEW",
                         callback

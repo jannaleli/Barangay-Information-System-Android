@@ -12,10 +12,33 @@
             android:layout_width="408dp"
             android:layout_height="560dp"
             app:layoutManager="LinearLayoutManager"
-            tools:context=".view.CheckDocuments"
-            tools:listitem="@layout/fragment_status_holder"
-            app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:context=".view.CheckDocuments"
+            tools:listitem="@layout/fragment_status_holder" />
+
+    <TextView
+            android:id="@+id/textView16"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="6dp"
+            android:text="Application ID"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/listRec"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+            android:id="@+id/textView17"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="4dp"
+            android:text="Status"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/listRec"
+            app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

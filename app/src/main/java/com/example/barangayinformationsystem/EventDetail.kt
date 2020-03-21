@@ -24,10 +24,15 @@ class EventDetail : AppCompatActivity() {
             val title = extras.getString("title")
             val content: String? = extras.getString("content")
             val image: ByteArray? = extras.getByteArray("image")
-            val bmp: Bitmap = BitmapFactory.decodeByteArray(image, 0 , image!!.size)
+
             titleView.text = title
             contentView.text = content
-            imageView.setImageBitmap(bmp!!)
+
+
+                val bmp: Bitmap = BitmapFactory.decodeByteArray(image, 0 , image!!.size)
+                imageView.setImageBitmap(bmp!!)
+
+
 
             //The key argument here must match that used in the other activity
         }

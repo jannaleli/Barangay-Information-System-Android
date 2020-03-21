@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import kotlinx.android.synthetic.main.activity_check_status.*
 
-class CheckStatus : AppCompatActivity() {
+class   CheckStatus : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

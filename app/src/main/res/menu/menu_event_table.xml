@@ -1,9 +1,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:app="http://schemas.android.com/apk/res-auto"
       xmlns:tools="http://schemas.android.com/tools"
-      tools:context="com.example.barangayinformationsystem.EventTable">
-    <item android:id="@+id/action_settings"
-          android:title="@string/action_settings"
+      tools:context="com.example.barangayinformationsystem.BottomMenu">
+    <item android:id="@+id/logout"
+          android:title="Log Out"
+            android:icon="@drawable/ambulance"
           android:orderInCategory="100"
-          app:showAsAction="never"/>
+          app:showAsAction="always"/>
 </menu>
